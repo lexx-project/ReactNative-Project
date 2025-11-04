@@ -1,150 +1,95 @@
 import { useState } from 'react';
 import {
-  FlatList,
-  RefreshControl,
-  ScrollView,
-  SectionList,
-  StyleSheet,
   Text,
   View,
+  StyleSheet,
+  Image,
+  TextInput,
+  ImageBackground,
 } from 'react-native';
 
 const App = () => {
-  const [refreshing, setRefreshing] = useState(false);
-  const onRefresh = () => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
-  };
-  return (
-    <View style={styles.screen}>
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
-        <Text style={styles.title}>Tugas No 1 (Scroll View Components)</Text>
+  const [email, setEmail] = useState('');
 
-        <Text style={styles.item}>Hello World 1 !</Text>
-        <Text style={styles.item}>Hello World 2 !</Text>
-        <Text style={styles.item}>Hello World 3 !</Text>
-        <Text style={styles.item}>Hello World 4 !</Text>
-        <Text style={styles.item}>Hello World 5 !</Text>
-        <Text style={styles.item}>Hello World 6 !</Text>
-        <Text style={styles.item}>Hello World 7 !</Text>
-        <Text style={styles.item}>Hello World 8 !</Text>
-        <Text style={styles.item}>Hello World 9 !</Text>
-        <Text style={styles.item}>Hello World 10 !</Text>
-        <Text style={styles.item}>Hello World 11 !</Text>
-        <Text style={styles.item}>Hello World 12 !</Text>
-        <Text style={styles.item}>Hello World 13 !</Text>
-        <Text style={styles.item}>Hello World 14 !</Text>
-        <Text style={styles.item}>Hello World 15 !</Text>
-      </ScrollView>
-      <FlatList
-        data={Array.from({ length: 100 }, (_, i) => `Hello World ${i + 1} !`)}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-        bounces={true}
-        ListHeaderComponent={
-          <Text style={styles.title}>Tugas No 2 (FlatList Components)</Text>
-        }
-        ListFooterComponent={<Text style={styles.title}>The End</Text>}
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              height: 1,
-              backgroundColor: '#444',
-              marginVertical: 8,
-            }}
-          />
-        )}
-      />
-      <SectionList
-        sections={[
-          {
-            title: 'Section 1',
-            data: Array.from({ length: 5 }, (_, i) => `Hello World ${i + 1} !`),
-          },
-          {
-            title: 'Section 2',
-            data: Array.from({ length: 5 }, (_, i) => `Hello World ${i + 1} !`),
-          },
-        ]}
-        keyExtractor={(item, index) => item + index}
-        renderItem={({ item }) => <Text style={styles.item}>{item}</Text>}
-        renderSectionHeader={({ section }) => (
-          <Text style={styles.title}>{section.title}</Text>
-        )}
-        ListHeaderComponent={
-          <Text style={styles.title}>Tugas No 3 (SectionList Components)</Text>
-        }
-        ItemSeparatorComponent={() => {
-          return (
-            <View
-              style={{
-                height: 1,
-                backgroundColor: '#444',
-                marginVertical: 8,
-              }}
-            />
-          );
+  return (
+    <View style={styles.body}>
+      <ImageBackground
+        source={{
+          uri: 'https://upload.lexxganz.my.id/uploads/pexels-chaitaastic-2093323%20(1).jpg',
         }}
-        style={styles.scroll}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-        ListFooterComponent={
-          <Text
-            style={{
-              fontSize: 18,
-              color: '#f5deb3',
-              marginBottom: 18,
-              textAlign: 'center',
-            }}
-          >
-            Component ini menggunakan RefreshControl
-          </Text>
-        }
+        style={styles.background}
+        imageStyle={{ opacity: 0.8 }}
+      />
+      <Text style={styles.text}>Ini Adalah Aplikasi Pertama Saya</Text>
+      <Text
+        style={styles.text}
+        numberOfLines={3}
+        selectable={true}
+        adjustsFontSizeToFit={false}
+        allowFontScaling={true}
+      >
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi sapiente
+        non soluta ex, illo distinctio veritatis molestias consequuntur id iste
+        accusantium, deserunt impedit minima, vel sequi minus veniam dignissimos
+        aut?
+      </Text>
+      <Image
+        source={{ uri: 'https://upload.lexxganz.my.id/uploads/INDOMIE.jpeg' }}
+        style={{ width: 200, height: 200 }}
+      />
+      <Text>Ini Indomie</Text>
+      <Text style={styles.text}>Masukkan Email</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
+  body: {
     flex: 1,
-    backgroundColor: '#202020',
-    paddingTop: 50,
-    paddingHorizontal: 8,
-  },
-  scroll: {
-    width: '90%',
-    maxHeight: '80%',
-    backgroundColor: '#2f2f2f',
-    borderRadius: 16,
-    padding: 16,
-    margin: 12,
-  },
-  scrollContent: {
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
-  title: {
-    fontSize: 32,
-    color: '#ff6767',
-    marginBottom: 24,
+  text: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 10,
     textAlign: 'center',
   },
-  item: {
-    fontSize: 30,
-    color: '#f5deb3',
-    marginBottom: 18,
-    textAlign: 'center',
+  input: {
+    width: '90%',
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 10,
+    paddingHorizontal: 10,
+    color: 'black',
   },
+  background: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  overlay: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+  },
+  title: { fontSize: 32, color: 'white', marginBottom: 20 },
+  switchContainer: { flexDirection: 'row', alignItems: 'center' },
 });
 
 export default App;
